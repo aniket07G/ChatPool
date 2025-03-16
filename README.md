@@ -46,8 +46,6 @@ npm run android
 Before proceeding, make sure that both **Node.js** and **npm** are up to date, as outdated versions may cause compatibility issues.
 
 ---
----
----
 
 # 📦 Install Required Libraries
 
@@ -118,8 +116,6 @@ To install it, run:
 npm install @react-native-async-storage/async-storage
 ```
 
----  
----
 ---
 
 # 🚀 How to Run the App
@@ -168,8 +164,6 @@ adb devices
 ✅ **App is Now Running!** 🎉  
 ✅ **Now your React Native project is fully set up with navigation, icons, and persistent storage!** 🚀 
 
----
----
 ---
 
 # App Structure and Standout Points  
