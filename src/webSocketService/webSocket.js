@@ -3,7 +3,7 @@ let ping = null;
 let isManuallyClosed = false;
 
 const connectWebSocket = (roomID, username, getNewMSSG, onReconnect, manageLoading) => {
-    ws = new WebSocket(`ws://chat-api-k4vi.onrender.com/ws/${roomID}/${username}`);
+    ws = new WebSocket(`wss://chat-api-k4vi.onrender.com/ws/${roomID}/${username}`);
     ws.onopen = () => {
         console.log("Connected");
         if (manageLoading) manageLoading(false);

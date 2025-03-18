@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { View, TouchableOpacity, Text, Image, Dimensions, StyleSheet, FlatList, ActivityIndicator, RefreshControl } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -12,6 +12,7 @@ const RoomsList = ({ navigation, route }) => {
     const [rooms, setRooms] = useState([]);
     const [loading, setLoading] = useState(true);
     const [refresh, setRefresh] = useState(false);
+    const retryRef = useRef(null);
     const username = route.params.username;
 
     const fetchRooms = async (retrycnt = 0) => {
@@ -27,10 +28,11 @@ const RoomsList = ({ navigation, route }) => {
             setRooms(responseData.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)));
             setRefresh(false);
             setLoading(false);
+            retrycnt = 0;
         } catch (error) {
             console.log(error);
             if (retrycnt < MAX_RETRIES) {
-                setTimeout(() => fetchRooms(retrycnt + 1), 3000);
+                retryRef.current = setTimeout(() => fetchRooms(retrycnt + 1), 5000);
             }
         }
     }
@@ -43,6 +45,10 @@ const RoomsList = ({ navigation, route }) => {
 
     useEffect(() => {
         fetchRooms(0);
+        return ()=>{
+            clearTimeout(retryRef.current);
+            console.log(clearing);
+        }
     }, [])
 
     const handleRoom = (roomID, roonName) => {
@@ -50,6 +56,9 @@ const RoomsList = ({ navigation, route }) => {
     }
 
     const handleCreateRoom = () => {
+        console.log("befor", retryRef.current);
+        clearTimeout(retryRef.current);
+        console.log("after", retryRef.current);
         navigation.navigate("CreateRoom", { username: username })
     }
 
