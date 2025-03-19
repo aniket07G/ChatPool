@@ -118,6 +118,17 @@ npm install @react-native-async-storage/async-storage
 
 ---
 
+## 📌 Install SafeAreaContext
+SafeAreaContext provides a way to handle safe area insets to ensure content is not hidden behind notches, status bars, or navigation bars.
+
+To install it, run:
+
+```sh
+npm install react-native-safe-area-context
+```
+
+---
+
 # 🚀 How to Run the App
 Follow these steps to run the MyKisan React Native app on your device or emulator.
 
